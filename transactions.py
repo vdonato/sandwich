@@ -30,6 +30,7 @@ query getTransactions ($block_number: Int) {
       amount0Out,
       amount1In,
       amount1Out,
+      logIndex,
     }
   }
 }
