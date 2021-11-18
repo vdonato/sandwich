@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
             print(f"Successfully collected {len(txs)} transactions in {block_number}.")
         except TransportQueryError:
-            print("Hit error attempting to fetch txs for block: {block_number}.")
+            print(f"Hit error attempting to fetch txs for block: {block_number}.")
 
         blocks_processed = block_number - STARTING_BLOCK + 1
         progress_pct = blocks_processed / BLOCKS_TO_PROCESS * 100
