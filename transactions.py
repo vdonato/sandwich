@@ -56,6 +56,23 @@ def fetch_txs_in_block(block_number):
     return filtered_txs
 
 
+def from_file(file_path, max_blocks=None):
+    all_txs = {}
+
+    with open(file_path, "r") as fp:
+        lines = fp.readlines()
+        for i, line in enumerate(lines):
+            if max_blocks is not None and i >= max_blocks:
+                break
+
+            txs = json.loads(line)
+            if len(txs) > 0:
+                block_number = int(txs[0]["blockNumber"])
+                all_txs[block_number] = txs
+
+    return all_txs
+
+
 if __name__ == "__main__":
     STARTING_BLOCK = 13588033  # Some random block mined on Nov 10, 2021
     ENDING_BLOCK = 13637842  # The most recent block when this comment was written
