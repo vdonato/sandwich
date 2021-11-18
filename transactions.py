@@ -5,7 +5,9 @@ from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 from gql.transport.exceptions import TransportQueryError
 
+OUTPUT_FILE = "transaction_data.txt"
 SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2"
+
 
 TXS_QUERY = """
 query getTransactions ($block_number: Int) {
@@ -77,8 +79,6 @@ if __name__ == "__main__":
     STARTING_BLOCK = 13588033  # Some random block mined on Nov 10, 2021
     ENDING_BLOCK = 13637842  # The most recent block when this comment was written
     BLOCKS_TO_PROCESS = ENDING_BLOCK - STARTING_BLOCK
-
-    OUTPUT_FILE = "transaction_data.txt"
 
     # Clear out any data that may be in the file.
     with open(OUTPUT_FILE, "w") as fp:
