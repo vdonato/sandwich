@@ -1,4 +1,5 @@
 import json
+from asyncio.exceptions import TimeoutError
 
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -76,7 +77,7 @@ if __name__ == "__main__":
                 fp.write("\n")
 
             print(f"Successfully collected {len(txs)} transactions in {block_number}.")
-        except TransportQueryError:
+        except (TimeoutError, TransportQueryError):
             print(f"Hit error attempting to fetch txs for block: {block_number}.")
 
         blocks_processed = block_number - STARTING_BLOCK + 1
