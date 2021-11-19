@@ -149,7 +149,7 @@ def txs_to_df(txs, sandwiches_in_block=None):
     return df
 
 
-"# Ethereum 🥪 attack data"
+"# Uniswap 🥪 attack data"
 
 with st.expander("Background info"):
     """
@@ -187,7 +187,7 @@ with st.expander("Background info"):
       1. Mr. Whale put a few thousand dollars into Bitcoin in 2010, and now he
          has more money than he knows what to do with. His next play is to buy
          a bunch of this funny dog coin SHIB that everyone is talking about.
-      2. He goes to Uniswap, a popular DEX, to buy some SHIB for USDT
+      2. He goes to Uniswap, a popular DEX, to buy some SHIB for USD
          (technically USDT).
       3. Señor Shark is keeping an eye on the mempool and sees a Uniswap
          transaction buying $1MM worth of SHIB. The transaction is offering 100
@@ -213,7 +213,7 @@ st.markdown("<br /> <br />", unsafe_allow_html=True)
 
 "### Profits by coin"
 st.dataframe(profits_by_coin())
-"### Moost attacked pairs"
+"### Most attacked pairs"
 st.dataframe(num_attacks_by_pair())
 
 
