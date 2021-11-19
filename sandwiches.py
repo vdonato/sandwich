@@ -35,6 +35,9 @@ def is_pure_swap(tx):
     return exactly_one_zero(coin0In, coin0Out) and exactly_one_zero(coin1In, coin1Out)
 
 
+log_index = lambda tx: int(tx["swaps"][0]["logIndex"])
+
+
 def find_sandwiches_in_txs(txs):
     sandwiches = []
 
@@ -51,14 +54,13 @@ def find_sandwiches_in_txs(txs):
         # overwhelming majority of attacks, so doing this is unlikely to make
         # much of a difference in our results.
         if len(group) == 2 and is_actually_sandwich(group):
-            sandwiches.append(tuple(group))
+            sandwiches.append(sorted(tuple(group), key=log_index))
 
     return sandwiches
 
 
 def calculate_profit(sandwich_txs):
-    log_index = lambda tx: int(tx["swaps"][0]["logIndex"])
-    tx0, tx1 = sorted(sandwich_txs, key=log_index)
+    tx0, tx1 = sandwich_txs
     swap0, swap1 = tx0["swaps"][0], tx1["swaps"][0]
 
     symbol0 = swap0["pair"]["token0"]["symbol"]
@@ -86,8 +88,7 @@ def calculate_profit(sandwich_txs):
 # TODO: Most of this code is duplicated from calculate_profit, and the two
 # should be refactored / cleaned up if there's enough time.
 def is_actually_sandwich(sandwich_txs):
-    log_index = lambda tx: int(tx["swaps"][0]["logIndex"])
-    tx0, tx1 = sorted(sandwich_txs, key=log_index)
+    tx0, tx1 = sandwich_txs
     swap0, swap1 = tx0["swaps"][0], tx1["swaps"][0]
 
     tx0Coin0In = float(swap0["amount0In"])
