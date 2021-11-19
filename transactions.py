@@ -1,9 +1,15 @@
 import json
+import logging
 from asyncio.exceptions import TimeoutError
 
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 from gql.transport.exceptions import TransportQueryError
+from gql.transport.requests import log as requests_logger
+
+logging.basicConfig(level=logging.WARNING)
+requests_logger.setLevel(logging.WARNING)
+
 
 OUTPUT_FILE = "transaction_data.txt"
 SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2"
