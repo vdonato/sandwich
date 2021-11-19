@@ -8,8 +8,7 @@ from sandwiches import calculate_profit, find_sandwiches_in_txs
 
 @st.experimental_memo
 def sandwich_data():
-    # TODO: Remove the max_blocks parameter when running for real.
-    txs_by_block = transactions.from_file(transactions.OUTPUT_FILE, max_blocks=1000)
+    txs_by_block = transactions.from_file(transactions.OUTPUT_FILE)
 
     sandwiches_by_block = {}
     for block_number, txs in txs_by_block.items():
